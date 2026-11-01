@@ -1,0 +1,183 @@
+# Number-to-Words-
+Number to Words Converter  -  Build by Trevor
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number to Words Converter</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f4f4f9;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    input[readonly] {
+      background-color: #e9ecef;
+    }
+
+    .credit {
+      text-align: center;
+      margin-top: 25px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>Number to Words</h2>
+
+    <label for="numInput">Enter Number:</label>
+    <input
+      type="number"
+      id="numInput"
+      min="0"
+      max="999999999"
+      step="1"
+      placeholder="e.g. 100"
+      oninput="convertNumberToWords()"
+    >
+
+    <label for="wordsOutput">In Words:</label>
+    <input
+      type="text"
+      id="wordsOutput"
+      placeholder="One hundred"
+      readonly
+    >
+
+    <p class="credit">
+      Developed by Trevor Nelson<br>
+      Version 1.0 &copy; 2026
+    </p>
+
+  </div>
+
+  <script>
+
+    function numberToWords(num) {
+
+      if (num === 0) return "Zero";
+
+      const units = [
+        "", "One", "Two", "Three", "Four",
+        "Five", "Six", "Seven", "Eight", "Nine"
+      ];
+
+      const teens = [
+        "Ten", "Eleven", "Twelve", "Thirteen",
+        "Fourteen", "Fifteen", "Sixteen",
+        "Seventeen", "Eighteen", "Nineteen"
+      ];
+
+      const tens = [
+        "", "", "Twenty", "Thirty", "Forty",
+        "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+      ];
+
+      function convertGroup(n) {
+
+        let words = [];
+
+        if (n >= 100) {
+          words.push(units[Math.floor(n / 100)] + " Hundred");
+          n %= 100;
+        }
+
+        if (n >= 10 && n < 20) {
+          words.push(teens[n - 10]);
+        } else {
+
+          if (n >= 20) {
+            words.push(tens[Math.floor(n / 10)]);
+            n %= 10;
+          }
+
+          if (n > 0) {
+            words.push(units[n]);
+          }
+        }
+
+        return words.join(" ");
+      }
+
+      let result = [];
+
+      if (num >= 1000000) {
+        result.push(
+          convertGroup(Math.floor(num / 1000000)) + " Million"
+        );
+        num %= 1000000;
+      }
+
+      if (num >= 1000) {
+        result.push(
+          convertGroup(Math.floor(num / 1000)) + " Thousand"
+        );
+        num %= 1000;
+      }
+
+      if (num > 0) {
+        result.push(convertGroup(num));
+      }
+
+      return result.join(" ");
+    }
+
+    function convertNumberToWords() {
+
+      const inputVal = document.getElementById("numInput").value;
+      const outputField = document.getElementById("wordsOutput");
+
+      if (inputVal === "") {
+        outputField.value = "";
+        return;
+      }
+
+      const num = Number(inputVal);
+
+      if (!Number.isInteger(num) || num < 0 || num > 999999999) {
+        outputField.value = "Enter a whole number from 0 to 999,999,999";
+        return;
+      }
+
+      outputField.value = numberToWords(num);
+    }
+
+  </script>
+
+</body>
+</html>
