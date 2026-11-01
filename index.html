@@ -177,6 +177,14 @@
     }
 
   </script>
-
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("App ready!"))
+      .catch(error => console.log("Service Worker Error:", error));
+  });
+}
+</script>
 </body>
 </html>
