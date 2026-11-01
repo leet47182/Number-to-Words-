@@ -1,0 +1,23 @@
+{
+  "name": "NTW - Number to Words Converter",
+  "short_name": "NTW",
+  "description": "Number to Words Converter - Built by Trevor",
+  "start_url": "/Number-to-Words-/",
+  "scope": "/Number-to-Words-/",
+  "display": "standalone",
+  "background_color": "#0755d9",
+  "theme_color": "#0755d9",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/Number-to-Words-/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Number-to-Words-/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
